@@ -117,7 +117,10 @@ __pragma(warning(disable : 4239))
         {
             pimpl_->client.call("reset");
         }
-
+        void RpcLibClientBase::resetUnreal()
+        {
+            pimpl_->client.call("resetUnreal");
+        }
         void RpcLibClientBase::confirmConnection()
         {
             ClockBase* clock = ClockFactory::get();

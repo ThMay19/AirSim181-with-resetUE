@@ -84,7 +84,7 @@ namespace airlib
     RpcLibServerBase::RpcLibServerBase(ApiProvider* api_provider, const std::string& server_address, uint16_t port)
         : api_provider_(api_provider)
     {
-
+		unreal_reset_ = false;
         if (server_address == "")
             pimpl_.reset(new impl(port));
         else
@@ -296,6 +296,9 @@ namespace airlib
             resetInProgress = false;
         });
 
+        pimpl_->server.bind("resetUnreal", [&]() -> void {
+            setUnrealReset();
+        });
         pimpl_->server.bind("simPrintLogMessage", [&](const std::string& message, const std::string& message_param, unsigned char severity) -> void {
             getWorldSimApi()->printLogMessage(message, message_param, severity);
         });
@@ -532,6 +535,19 @@ namespace airlib
     void* RpcLibServerBase::getServer() const
     {
         return &pimpl_->server;
+    }
+    bool RpcLibServerBase::checkUnrealReset()
+    {
+        return unreal_reset_;
+    }
+
+    void RpcLibServerBase::unSetUnrealReset()
+    {
+        unreal_reset_ = false;
+    }
+
+    void RpcLibServerBase::setUnrealReset() {
+        unreal_reset_ = true;
     }
 }
 } //namespace
