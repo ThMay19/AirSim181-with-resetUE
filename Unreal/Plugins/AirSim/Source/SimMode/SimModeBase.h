@@ -95,6 +95,8 @@ public:
         return static_cast<PawnSimApi*>(api_provider_->getVehicleSimApi(vehicle_name));
     }
 
+	void checkUnrealReset();
+
     const APIPCamera* getExternalCamera(const std::string& camera_name) const
     {
         return external_cameras_.findOrDefault(camera_name, nullptr);
