@@ -24,6 +24,19 @@ class VehicleClient:
         Note that you must call `enableApiControl` and `armDisarm` again after the call to reset
         """
         self.client.call('reset')
+####edited###
+    def resetUnreal(self, sleep_time_before =.1, sleep_time_after=.1):
+        time.sleep(sleep_time_before)  #not sure why we need this, but sometimes
+                                       #we do
+        self.client.call('resetUnreal')
+        time.sleep(sleep_time_after) #this is necessary because resetUnreal is done
+                              #through setting a local variable through RPC
+                              #and later reacting to it in SimMode
+                              #which means other rpc calls might take effect
+                              #before reset. Hence to ensure the order, we need
+                              # an extra sleep. With Behzad machines
+                              # it seems like 30 ms is enough sleep time
+                              # althought sometimes it needs 300 ms!!!!
 
     def ping(self):
         """
