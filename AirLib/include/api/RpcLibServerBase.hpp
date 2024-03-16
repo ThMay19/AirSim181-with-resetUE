@@ -21,6 +21,9 @@ namespace airlib
 
         virtual void start(bool block, std::size_t thread_count) override;
         virtual void stop() override;
+        virtual bool checkUnrealReset() override;
+        virtual void setUnrealReset() override;
+        virtual void unSetUnrealReset() override;
 
         class ApiNotSupported : public std::runtime_error
         {
@@ -64,7 +67,7 @@ namespace airlib
 
     private:
         ApiProvider* api_provider_;
-
+	    bool unreal_reset_;
         struct impl;
         std::unique_ptr<impl> pimpl_;
     };

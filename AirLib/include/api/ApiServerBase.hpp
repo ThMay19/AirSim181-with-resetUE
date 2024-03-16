@@ -17,7 +17,9 @@ namespace airlib
     public:
         virtual void start(bool block, std::size_t thread_count) = 0;
         virtual void stop() = 0;
-
+        virtual bool checkUnrealReset() = 0;
+        virtual void unSetUnrealReset() = 0;
+        virtual void setUnrealReset() = 0;
         virtual ~ApiServerBase() = default;
     };
 }

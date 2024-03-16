@@ -155,6 +155,8 @@ namespace airlib
         bool simSetObjectMaterial(const std::string& object_name, const std::string& material_name, const int component_id = 0);
         bool simSetObjectMaterialFromTexture(const std::string& object_name, const std::string& texture_path, const int component_id = 0);
 
+        //----------- APIs to control ACharacter in scene ----------/
+       void resetUnreal(); 
         // Recording APIs
         void startRecording();
         void stopRecording();
